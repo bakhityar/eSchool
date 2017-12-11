@@ -1,17 +1,20 @@
 package com.testgreetgo.eSchool.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Student {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String name;
   private String faculty;
   private int course;
 
-  public Student(int id, String name, String faculty, int course) {
-    this.id = id;
-    this.name = name;
-    this.faculty = faculty;
-    this.course = course;
-  }
+  public Student() {}
 
   public int getId() {
     return id;
