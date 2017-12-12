@@ -36,11 +36,39 @@ public class StudentDaoImpl implements StudentDao{
 
   @Override
   public void save(Student student) {
+    //Open session
+    Session session = sessionFactory.openSession();
+
+    //Begin transaction
+    session.beginTransaction();
+
+    //Save the data
+    session.save(student);
+
+    //Commit transaction
+    session.getTransaction().commit();
+
+    //Close session
+    session.close();
 
   }
 
   @Override
   public void delete(Student student) {
+    //Open session
+    Session session = sessionFactory.openSession();
+
+    //Begin transaction
+    session.beginTransaction();
+
+    //Delete data
+    session.delete(student);
+
+    //Commit transaction
+    session.getTransaction().commit();
+
+    //Close session
+    session.close();
 
   }
 }

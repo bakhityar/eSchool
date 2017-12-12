@@ -24,11 +24,13 @@ public class StudentServiceImpl implements StudentService {
 
   @Override
   public void save(Student student) {
+    studentDao.save(student);
 
   }
 
   @Override
   public void delete(Student student) {
+    studentDao.delete(student);
 
   }
 }

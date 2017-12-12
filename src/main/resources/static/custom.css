@@ -21,6 +21,12 @@
 td a{
     width:100%;
     display:block;
+    text-decoration: none;
 }
+
+a {
+  text-decoration: none;
+}
+
 
   

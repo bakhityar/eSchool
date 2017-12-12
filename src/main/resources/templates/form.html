@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>eSchool | home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
+    <link rel="stylesheet" th:href="@{/custom.css}"/>
+</head>
+<body>
+
+
+<!-- jumbotron   -->
+
+<div class="jumbotron jumbotron-fluid bg-info text-white">
+    <div class="container text-sm-center pt-5">
+        <h1 class="display-2">eSchool SystemForm</h1>
+        <p class="lead">Тестовое задание "Электронная школа"</p>
+    </div>
+</div>
+<form th:action="@{/students}" method="post" th:object="${student}">
+    <div class="container">
+                <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">ФИО</label>
+                <div class="col-sm-10" style="width: 100%; max-width: 500px;">
+                    <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="ФИО"/>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" role="alert"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="faculty" class="col-sm-2 col-form-label">Факультет</label>
+                <div class="col-sm-10" style="width: 100%; max-width: 500px;">
+                    <input type="text" th:field="*{faculty}" class="form-control" id="faculty" placeholder="Факультет"/>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('faculty')}" th:errors="*{faculty}" role="alert"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="course" class="col-sm-2 col-form-label">Курс</label>
+                <div class="col-sm-10" style="width: 100%; max-width: 500px;">
+                    <input type="text" th:field="*{course}" class="form-control" id="course" placeholder="Курс"/>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('course')}" th:errors="*{course}" role="alert"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                    <a th:href="@{/}" class="btn btn-primary">Отмена</a>
+                </div>
+            </div>
+    </div>
+</form>
+
+<!--  footer    -->
+<div class=" text-md-center">
+    <small>&copy; 2017 GreetGo!</small>
+</div>
+
+<!-- jQuery first, then bootstrap js -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+</body>
+</html>
