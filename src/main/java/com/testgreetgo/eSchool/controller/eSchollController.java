@@ -2,7 +2,6 @@ package com.testgreetgo.eSchool.controller;
 
 import com.testgreetgo.eSchool.config.FlashMessage;
 import com.testgreetgo.eSchool.dao.StudentDaoImpl;
-import com.testgreetgo.eSchool.data.StudentRepository;
 import com.testgreetgo.eSchool.model.Student;
 import com.testgreetgo.eSchool.service.StudentService;
 import org.hibernate.Session;
@@ -23,9 +22,6 @@ import javax.validation.Valid;
 @Controller
 public class eSchollController {
   @Autowired
-  private StudentRepository studentRepository;
-
-  @Autowired
   private StudentService studentService;
 
   @SuppressWarnings("unchecked")
@@ -35,12 +31,14 @@ public class eSchollController {
     modelMap.put("students", students);
     return "home";
   }
-  @RequestMapping(value = "/student/{name}")
-  public String studentDetails(@PathVariable String name, ModelMap modelMap) {
-    Student student = studentRepository.findByName(name);
+  @RequestMapping(value = "/student/{id}")
+  public String studentDetails(@PathVariable Long id, ModelMap modelMap) {
+    Student student = studentService.findById(id);
     modelMap.put("student", student);
     return "student-detail";
   }
+
+  //Add a student
   @RequestMapping(value = "/students", method = RequestMethod.POST)
   public String addStudent(@Valid Student student, BindingResult result, RedirectAttributes redirectAttributes) {
     //Check if there errors on validation
@@ -53,8 +51,7 @@ public class eSchollController {
       return "redirect:/students/add";
     }
     studentService.save(student);
-    FlashMessage Fm = new FlashMessage("Новый студент добавлен!", FlashMessage.Status.SUCCESS );
-    redirectAttributes.addFlashAttribute("flash", Fm );
+    redirectAttributes.addFlashAttribute("flash", new FlashMessage("Новый студент добавлен!", FlashMessage.Status.SUCCESS ));
 
     return "redirect:/";
   }
@@ -64,6 +61,44 @@ public class eSchollController {
     if (!model.containsAttribute("student")) {
       model.addAttribute("student", new Student());
     }
+    model.addAttribute("action", "/students");
+    model.addAttribute("submit", "Добавить");
     return "form";
+  }
+
+  @RequestMapping(value="/students/{id}/edit")
+  public String formEditStudent(@PathVariable Long id, Model model) {
+    if (!model.containsAttribute("student")) {
+      model.addAttribute("student", studentService.findById(id));
+    }
+    model.addAttribute("action", String.format("/students/%s", id));
+    model.addAttribute("submit", "Сохранить");
+    return "form";
+  }
+
+  //Update an existing student
+  @RequestMapping(value="students/{id}")
+  public String updateStudent(@Valid Student student, BindingResult result, RedirectAttributes redirectAttributes) {
+    if (result.hasErrors()) {
+      //Include valiation errors upon redirect
+      redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.student", result);
+
+      //Add student if invalid was received
+      redirectAttributes.addFlashAttribute("student", student);
+      return String.format("redirect:/students/%s/add", student.getId());
+    }
+    studentService.save(student);
+    redirectAttributes.addFlashAttribute("flash", new FlashMessage("Студент обновлен!", FlashMessage.Status.SUCCESS ));
+
+    return "redirect:/";
+  }
+
+  //Delete an existing student
+  @RequestMapping(value="/students/{id}/delete", method = RequestMethod.POST)
+  public String deleteStudent(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    Student student = studentService.findById(id);
+    studentService.delete(student);
+    redirectAttributes.addFlashAttribute("flash", new FlashMessage("Студент успешно удален!", FlashMessage.Status.SUCCESS));
+    return "redirect:/";
   }
 }

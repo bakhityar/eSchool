@@ -31,8 +31,13 @@ public class StudentDaoImpl implements StudentDao{
 
   @Override
   public Student findById(Long id) {
-    return null;
+    Session session = sessionFactory.openSession();
+    Student student = session.get(Student.class, id);
+    session.close();
+    return student;
   }
+
+
 
   @Override
   public void save(Student student) {
@@ -43,7 +48,7 @@ public class StudentDaoImpl implements StudentDao{
     session.beginTransaction();
 
     //Save the data
-    session.save(student);
+    session.saveOrUpdate(student);
 
     //Commit transaction
     session.getTransaction().commit();

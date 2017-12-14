@@ -19,15 +19,15 @@
         <p class="lead">Тестовое задание "Электронная школа"</p>
     </div>
 </div>
-<form>
+<form th:object="${student}">
     <div class="container">
 
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Username</th>
+                <th scope="col">Name</th>
+                <th scope="col">Faculty</th>
+                <th scope="col">Course</th>
             </tr>
             </thead>
             <tbody>
@@ -38,12 +38,17 @@
             </tr>
             </tbody>
         </table>
-
-        <div class="btn ">
-            <button class="btn btn-primary btn-lg" type="submit" id="delete_btn">Удалить</button>
-        </div>
     </div>
 </form>
+
+        <div class="btn container">
+            <form th:action="@{|/students/${student.id}/delete|}" method="post">
+                <button class="btn btn-primary" type="submit" id="delete_btn">Удалить</button>
+            </form>
+            <a th:href="@{|/students/${student.id}/edit|}" class="btn btn-primary">Редактировать</a>
+        </div>
+
+
 
 <!--  footer    -->
 <div class=" text-md-center">

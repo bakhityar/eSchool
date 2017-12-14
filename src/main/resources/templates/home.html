@@ -22,23 +22,22 @@
 <form>
     <div class="container">
         <!-- TODO: не выводит значение из FlashMessage -->
-        <div class="alert alert-success" th:if="${flash}" th:text="Добавлен">Новый ученик добавлен</div>
-
+        <div class="alert alert-success" th:if="${flash}" th:text="${flash.message}">Новый ученик добавлен</div>
 
         <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Username</th>
+                <th scope="col">Name</th>
+                <th scope="col">Faculty</th>
+                <th scope="col">Course</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="student : ${students}">
 
                     <th scope="row" th:text="${student.id}">1</th>
-                    <td> <a th:text="${student.name}" th:href="@{'/student/' + ${student.name}}" style="text-decoration: none;"> Mark </a></td>
+                    <td> <a th:text="${student.name}" th:href="@{'/student/' + ${student.id}}" style="text-decoration: none;"> Mark </a></td>
                     <td> <a th:text="${student.faculty}" th:href="@{'/student/' + ${student.name}}"> Otto </a></td>
                     <td> <a th:text="${student.course}" th:href="@{'/student/' + ${student.name}}"> @OTM </a></td>
             </tr>
