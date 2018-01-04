@@ -15,7 +15,7 @@
 
 <div class="jumbotron jumbotron-fluid bg-info text-white">
     <div class="container text-sm-center pt-5">
-        <h1 class="display-2">eSchool SystemNEXT</h1>
+        <h1 class="display-2">eSchool System</h1>
         <p class="lead">Тестовое задание "Электронная школа"</p>
     </div>
 </div>
@@ -41,17 +41,20 @@
     </div>
 </form>
 
-        <div class="btn container">
+        <div class="form-group row">
+            <div class="container">
             <form th:action="@{|/students/${student.id}/delete|}" method="post">
                 <button class="btn btn-primary" type="submit" id="delete_btn">Удалить</button>
+                <a th:href="@{|/students/${student.id}/edit|}" class="btn btn-primary">Редактировать</a>
             </form>
-            <a th:href="@{|/students/${student.id}/edit|}" class="btn btn-primary">Редактировать</a>
+            </div>
+
         </div>
 
 
 
 <!--  footer    -->
-<div class=" text-md-center">
+<div class=" text-sm-center">
     <small>&copy; 2017 GreetGo!</small>
 </div>
 

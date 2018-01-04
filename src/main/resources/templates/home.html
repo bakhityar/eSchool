@@ -15,7 +15,7 @@
 
 <div class="jumbotron jumbotron-fluid bg-info text-white">
     <div class="container text-sm-center pt-5">
-        <h1 class="display-2">eSchool SystemNEXT</h1>
+        <h1 class="display-2">eSchool System</h1>
         <p class="lead">Тестовое задание "Электронная школа"</p>
     </div>
 </div>
@@ -38,8 +38,8 @@
 
                     <th scope="row" th:text="${student.id}">1</th>
                     <td> <a th:text="${student.name}" th:href="@{'/student/' + ${student.id}}" style="text-decoration: none;"> Mark </a></td>
-                    <td> <a th:text="${student.faculty}" th:href="@{'/student/' + ${student.name}}"> Otto </a></td>
-                    <td> <a th:text="${student.course}" th:href="@{'/student/' + ${student.name}}"> @OTM </a></td>
+                    <td> <a th:text="${student.faculty}" th:href="@{'/student/' + ${student.id}}"> Otto </a></td>
+                    <td> <a th:text="${student.course}" th:href="@{'/student/' + ${student.id}}"> @OTM </a></td>
             </tr>
             </tbody>
         </table>
@@ -51,7 +51,7 @@
 </form>
 
 <!--  footer    -->
-<div class=" text-md-center">
+<div class=" text-sm-center">
     <small>&copy; 2017 GreetGo!</small>
 </div>
 
