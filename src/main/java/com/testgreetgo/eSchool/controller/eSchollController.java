@@ -102,8 +102,9 @@ public class eSchollController {
     return "redirect:/";
   }
 
+  @SuppressWarnings("unchecked")
   @RequestMapping(value="/login")
-  public String loginForm() {
+  public String loginForm(ModelMap modelMap) {
   return "login";
   }
 }
