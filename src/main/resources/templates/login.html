@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title>eSchool | home</title>
+    <title>eSchool | login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
     <link rel="stylesheet" th:href="@{/custom.css}"/>
 </head>
@@ -19,31 +19,28 @@
         <p class="lead">Тестовое задание "Электронная школа"</p>
     </div>
 </div>
-<form>
+<form th:action="@{/login}" method="post">
     <div class="container">
-        <!-- TODO: не выводит значение из FlashMessage -->
-        <div class="alert alert-success" th:if="${flash}" th:text="${flash.message}">Новый ученик добавлен</div>
-
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Faculty</th>
-                <th scope="col">Course</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="student : ${students}">
-                    <td> <a th:text="${student.name}" th:href="@{'/student/' + ${student.id}}" style="text-decoration: none;"> Mark </a></td>
-                    <td> <a th:text="${student.faculty}" th:href="@{'/student/' + ${student.id}}"> Otto </a></td>
-                    <td> <a th:text="${student.course}" th:href="@{'/student/' + ${student.id}}"> @OTM </a></td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div class="col-sm-10">
-            <a href="/students/add" class="btn btn-primary">Добавить нового студента</a>
+        <div class="alert alert-danger" th:if="${param.error}">
+            Invalid username or password.
         </div>
+                <div class="form-group row">
+                <label for="login" class="col-sm-2 col-form-label">Логин</label>
+                <div class="col-sm-10" style="width: 100%; max-width: 500px;">
+                    <input type="text" class="form-control" name="username" id="login" placeholder="Логин"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-sm-2 col-form-label">Пароль</label>
+                <div class="col-sm-10" style="width: 100%; max-width: 500px;">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Пароль"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </div>
+            </div>
     </div>
 </form>
 

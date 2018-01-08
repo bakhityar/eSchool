@@ -19,7 +19,7 @@ public class Student {
   private String name;
 
   @NotNull
-  @Size(min = 2, max = 10)
+  @Size(min = 2, max = 30)
   private String faculty;
 
   @NotNull

@@ -101,4 +101,9 @@ public class eSchollController {
     redirectAttributes.addFlashAttribute("flash", new FlashMessage("Студент успешно удален!", FlashMessage.Status.SUCCESS));
     return "redirect:/";
   }
+
+  @RequestMapping(value="/login")
+  public String loginForm() {
+  return "login";
+  }
 }
